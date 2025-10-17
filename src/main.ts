@@ -29,7 +29,7 @@ class Hydrop extends utils.Adapter {
 		// this.config:
 		this.log.info('config meterName: ' + this.config.meterName);
 		this.log.info('config apiKey: ' + this.config.apiKey);
-		this.log.info('config historyDys: ' + this.config.historyDys);
+		this.log.info('config historyDays: ' + this.config.historyDays);
 
 		/*
 		For every state in the system there has to be also an object of type state
@@ -73,7 +73,7 @@ class Hydrop extends utils.Adapter {
 		let result = await this.checkPasswordAsync('admin', 'iobroker');
 		this.log.info('check user admin pw iobroker: ' + result);
 
-		result = await this.checkGroupAsync('admin', 'admin');
+		//result = await this.checkGroupAsync('admin', 'admin');
 		this.log.info('check group user admin group admin: ' + result);
 	}
 

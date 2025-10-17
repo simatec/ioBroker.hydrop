@@ -1,6 +1,6 @@
 {
-	"hydrop adapter settings": "hydrop的适配器设置",
-	"meterName": "Name of the water meter",
-	"apiKey": "API Key from Hydrop Systems",
-	"historyDys": "History Days"
+	"apiKey": "Hydrop Systems 的 API 密钥",
+	"historyDays": "历史日",
+	"hydrop adapter settings": "Hydrop 的适配器设置",
+	"meterName": "水表名称"
 }

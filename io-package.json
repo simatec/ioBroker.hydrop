@@ -85,7 +85,7 @@
 	"native": {
 		"meterName": "",
 		"apiKey": "",
-		"historyDys": "7"
+		"historyDays": "7"
 	},
 	"objects": [],
 	"instanceObjects": []

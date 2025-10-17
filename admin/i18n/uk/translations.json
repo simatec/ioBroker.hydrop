@@ -1,6 +1,6 @@
 {
-	"hydrop adapter settings": "Налаштування адаптера для hydrop",
-	"meterName": "Name of the water meter",
-	"apiKey": "API Key from Hydrop Systems",
-	"historyDys": "History Days"
+	"apiKey": "Ключ API від Hydrop Systems",
+	"historyDays": "Дні історії",
+	"hydrop adapter settings": "Налаштування адаптера для гідроп",
+	"meterName": "Назва лічильника води"
 }

@@ -6,7 +6,7 @@ declare global {
 		interface AdapterConfig {
 			meterName: string;
 			apiKey: string;
-			historyDys: number;
+			historyDays: number;
 		}
 	}
 }

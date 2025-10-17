@@ -12,7 +12,7 @@
 			"label": "API Key from Hydrop Systems",
 			"newLine": true
 		},
-		"historyDys": {
+		"historyDays": {
 			"type": "number",
 			"label": "History Days",
 			"newLine": true

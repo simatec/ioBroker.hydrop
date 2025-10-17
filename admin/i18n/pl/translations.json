@@ -1,6 +1,6 @@
 {
+	"apiKey": "Klucz API firmy Hydrop Systems",
+	"historyDays": "Dni Historii",
 	"hydrop adapter settings": "Ustawienia adaptera dla hydrop",
-	"meterName": "Name of the water meter",
-	"apiKey": "API Key from Hydrop Systems",
-	"historyDys": "History Days"
+	"meterName": "Nazwa wodomierza"
 }
