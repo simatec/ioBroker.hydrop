@@ -27,9 +27,9 @@ class Hydrop extends utils.Adapter {
 
 		// The adapters config (in the instance object everything under the attribute "native") is accessible via
 		// this.config:
-		this.log.info('config meterName: ' + this.config.meterName);
-		this.log.info('config apiKey: ' + this.config.apiKey);
-		this.log.info('config historyDays: ' + this.config.historyDays);
+		// this.log.info('config meterName: ' + this.config.meterName);
+		// this.log.info('config apiKey: ' + this.config.apiKey);
+		// this.log.info('config historyDays: ' + this.config.historyDays);
 
 		/*
 		For every state in the system there has to be also an object of type state
