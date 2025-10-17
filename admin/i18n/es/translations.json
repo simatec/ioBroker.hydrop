@@ -1,0 +1,6 @@
+{
+	"hydrop adapter settings": "Ajustes del adaptador para hydrop",
+	"meterName": "Name of the water meter",
+	"apiKey": "API Key from Hydrop Systems",
+	"historyDys": "History Days"
+}

@@ -1,0 +1,92 @@
+{
+	"common": {
+		"name": "hydrop",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"uk": "Початкова версія",
+				"zh-cn": "首次出版"
+			}
+		},
+		"titleLang": {
+			"en": "Reading and monitoring water meters from Hydrop Systems",
+			"de": "Reading and monitoring water meters from Hydrop Systems",
+			"ru": "Reading and monitoring water meters from Hydrop Systems",
+			"pt": "Reading and monitoring water meters from Hydrop Systems",
+			"nl": "Reading and monitoring water meters from Hydrop Systems",
+			"fr": "Reading and monitoring water meters from Hydrop Systems",
+			"it": "Reading and monitoring water meters from Hydrop Systems",
+			"es": "Reading and monitoring water meters from Hydrop Systems",
+			"pl": "Reading and monitoring water meters from Hydrop Systems",
+			"uk": "Reading and monitoring water meters from Hydrop Systems",
+			"zh-cn": "Reading and monitoring water meters from Hydrop Systems"
+		},
+		"desc": {
+			"en": "Hydrop Systems",
+			"de": "Hydrop Systems",
+			"ru": "Hydrop Systems",
+			"pt": "Hydrop Systems",
+			"nl": "Hydrop Systems",
+			"fr": "Hydrop Systems",
+			"it": "Hydrop Systems",
+			"es": "Hydrop Systems",
+			"pl": "Hydrop Systems",
+			"uk": "Hydrop Systems",
+			"zh-cn": "Hydrop Systems"
+		},
+		"authors": [
+			"simatec <hydrop@simateccloud.de>"
+		],
+		"keywords": [
+			"Water meter",
+			"water consumption",
+			"water",
+			"water damage"
+		],
+		"licenseInformation": {
+			"type": "free",
+			"license": "MIT"
+		},
+		"platform": "Javascript/Node.js",
+		"icon": "hydrop.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/simatec/ioBroker.hydrop/main/admin/hydrop.png",
+		"readme": "https://github.com/simatec/ioBroker.hydrop/blob/main/README.md",
+		"loglevel": "info",
+		"tier": 3,
+		"mode": "daemon",
+		"type": "metering",
+		"compact": true,
+		"connectionType": "cloud",
+		"dataSource": "poll",
+		"adminUI": {
+			"config": "json"
+		},
+		"dependencies": [
+			{
+				"js-controller": ">=6.0.11"
+			}
+		],
+		"globalDependencies": [
+			{
+				"admin": "7.0.23"
+			}
+		]
+	},
+	"native": {
+		"meterName": "",
+		"apiKey": "",
+		"historyDys": "7"
+	},
+	"objects": [],
+	"instanceObjects": []
+}

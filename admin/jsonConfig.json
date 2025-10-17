@@ -1,0 +1,21 @@
+{
+	"i18n": true,
+	"type": "panel",
+	"items": {
+		"meterName": {
+			"type": "text",
+			"label": "Name of the water meter",
+			"newLine": true
+		},
+		"apiKey": {
+			"type": "text",
+			"label": "API Key from Hydrop Systems",
+			"newLine": true
+		},
+		"historyDys": {
+			"type": "number",
+			"label": "History Days",
+			"newLine": true
+		}
+	}
+}
