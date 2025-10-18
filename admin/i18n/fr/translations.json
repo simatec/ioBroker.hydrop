@@ -1,6 +1,13 @@
 {
-	"apiKey": "Clé API d'Hydrop Systems",
-	"historyDays": "Journées de l'histoire",
-	"hydrop adapter settings": "Paramètres de l'adaptateur pour hydrop",
-	"meterName": "Nom du compteur d'eau"
+	"API Key from Hydrop Systems": "Clé API d'Hydrop Systems",
+	"API Key from Hydrop Systems account": "Clé API du compte Hydrop Systems",
+	"Connect your Hydrop System with ioBroker": "Connectez votre système Hydrop avec ioBroker",
+	"History Days": "Journées de l'histoire",
+	"Hydrop Settings": "Paramètres hydrop",
+	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Si vous n'avez pas encore de clé API, merci d'envoyer une demande par email à support@hydrop-systems.com",
+	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Si vous aimez ce projet et souhaitez soutenir son développement, n'hésitez pas à faire un don.",
+	"Name of the water meter": "Nom du compteur d'eau",
+	"Name of the water meter as defined in your Hydrop account": "Nom du compteur d'eau tel que défini dans votre compte Hydrop",
+	"Number of days to fetch historical data": "Nombre de jours pour récupérer les données historiques",
+	"hydrop adapter settings": "Paramètres de l'adaptateur pour hydrop"
 }

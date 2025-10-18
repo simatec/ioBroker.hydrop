@@ -1,6 +1,13 @@
 {
-	"apiKey": "Klucz API firmy Hydrop Systems",
-	"historyDays": "Dni Historii",
-	"hydrop adapter settings": "Ustawienia adaptera dla hydrop",
-	"meterName": "Nazwa wodomierza"
+	"API Key from Hydrop Systems": "Klucz API firmy Hydrop Systems",
+	"API Key from Hydrop Systems account": "Klucz API z konta Hydrop Systems",
+	"Connect your Hydrop System with ioBroker": "Połącz swój system Hydrop z ioBrokerem",
+	"History Days": "Dni Historii",
+	"Hydrop Settings": "Ustawienia Hydropu",
+	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Jeśli nie masz jeszcze klucza API, wyślij prośbę e-mailem na adres support@hydrop-systems.com",
+	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Jeśli podoba Ci się ten projekt i chciałbyś wesprzeć jego rozwój, możesz zostawić darowiznę.",
+	"Name of the water meter": "Nazwa wodomierza",
+	"Name of the water meter as defined in your Hydrop account": "Nazwa wodomierza zdefiniowana na Twoim koncie Hydrop",
+	"Number of days to fetch historical data": "Liczba dni pobierania danych historycznych",
+	"hydrop adapter settings": "Ustawienia adaptera dla hydrop"
 }

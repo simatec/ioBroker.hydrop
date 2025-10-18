@@ -1,6 +1,13 @@
 {
-	"apiKey": "Chiave API di Hydrop Systems",
-	"historyDays": "Giornate della storia",
-	"hydrop adapter settings": "Impostazioni dell'adattatore per l'idroponica",
-	"meterName": "Nome del contatore dell'acqua"
+	"API Key from Hydrop Systems": "Chiave API di Hydrop Systems",
+	"API Key from Hydrop Systems account": "Chiave API dall'account Hydrop Systems",
+	"Connect your Hydrop System with ioBroker": "Collega il tuo sistema Hydrop con ioBroker",
+	"History Days": "Giornate della storia",
+	"Hydrop Settings": "Impostazioni dell'idropassaggio",
+	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Se non disponi ancora di una chiave API, invia una richiesta via e-mail a support@drop-systems.com",
+	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Se ti piace questo progetto e desideri sostenerne lo sviluppo, puoi lasciare una donazione.",
+	"Name of the water meter": "Nome del contatore dell'acqua",
+	"Name of the water meter as defined in your Hydrop account": "Nome del contatore dell'acqua come definito nel tuo account Hydrop",
+	"Number of days to fetch historical data": "Numero di giorni per recuperare i dati storici",
+	"hydrop adapter settings": "Impostazioni dell'adattatore per l'idroponica"
 }

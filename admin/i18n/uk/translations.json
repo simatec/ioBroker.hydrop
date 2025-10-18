@@ -1,6 +1,13 @@
 {
-	"apiKey": "Ключ API від Hydrop Systems",
-	"historyDays": "Дні історії",
-	"hydrop adapter settings": "Налаштування адаптера для гідроп",
-	"meterName": "Назва лічильника води"
+	"API Key from Hydrop Systems": "Ключ API від Hydrop Systems",
+	"API Key from Hydrop Systems account": "Ключ API з облікового запису Hydrop Systems",
+	"Connect your Hydrop System with ioBroker": "Підключіть свою систему Hydrop до ioBroker",
+	"History Days": "Дні історії",
+	"Hydrop Settings": "Налаштування Hydrop",
+	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Якщо у вас ще немає ключа API, надішліть запит електронною поштою на support@hydrop-systems.com",
+	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Якщо вам подобається цей проект і ви хочете підтримати його розвиток, ви можете залишити пожертву.",
+	"Name of the water meter": "Назва лічильника води",
+	"Name of the water meter as defined in your Hydrop account": "Назва лічильника води, як визначено у вашому обліковому записі Hydrop",
+	"Number of days to fetch historical data": "Кількість днів для отримання історичних даних",
+	"hydrop adapter settings": "Налаштування адаптера для гідроп"
 }

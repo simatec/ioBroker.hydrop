@@ -1,6 +1,13 @@
 {
 	"hydrop adapter settings": "Adapter settings for hydrop",
-	"meterName": "Name of the water meter",
-	"apiKey": "API Key from Hydrop Systems",
-	"historyDays": "History Days"
+	"Name of the water meter": "Name of the water meter",
+	"API Key from Hydrop Systems": "API Key from Hydrop Systems",
+	"History Days": "History Days",
+	"Connect your Hydrop System with ioBroker": "Connect your Hydrop System with ioBroker",
+	"Hydrop Settings": "Hydrop Settings",
+	"Name of the water meter as defined in your Hydrop account": "Name of the water meter as defined in your Hydrop account",
+	"API Key from Hydrop Systems account": "API Key from Hydrop Systems account",
+	"If you like this project and would like to support its development, you are welcome to leave a donation.": "If you like this project and would like to support its development, you are welcome to leave a donation.",
+	"Number of days to fetch historical data": "Number of days to fetch historical data",
+	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "If you do not yet have an API key, please send a request by email to support@hydrop-systems.com"
 }

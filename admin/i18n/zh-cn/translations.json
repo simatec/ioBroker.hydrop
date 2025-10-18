@@ -1,6 +1,13 @@
 {
-	"apiKey": "Hydrop Systems 的 API 密钥",
-	"historyDays": "历史日",
-	"hydrop adapter settings": "Hydrop 的适配器设置",
-	"meterName": "水表名称"
+	"API Key from Hydrop Systems": "Hydrop Systems 的 API 密钥",
+	"API Key from Hydrop Systems account": "来自 Hydrop Systems 帐户的 API 密钥",
+	"Connect your Hydrop System with ioBroker": "将您的 Hydrop 系统与 ioBroker 连接",
+	"History Days": "历史日",
+	"Hydrop Settings": "水滴设置",
+	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "如果您还没有 API 密钥，请通过电子邮件发送请求至 support@Hydrop-systems.com",
+	"If you like this project and would like to support its development, you are welcome to leave a donation.": "如果您喜欢这个项目并愿意支持它的发展，欢迎您留下捐款。",
+	"Name of the water meter": "水表名称",
+	"Name of the water meter as defined in your Hydrop account": "您的 Hydrop 帐户中定义的水表名称",
+	"Number of days to fetch historical data": "获取历史数据的天数",
+	"hydrop adapter settings": "Hydrop 的适配器设置"
 }
