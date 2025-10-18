@@ -36,9 +36,6 @@ class Hydrop extends utils.Adapter {
    * Is called when databases are connected and adapter received configuration.
    */
   async onReady() {
-    this.log.info("config meterName: " + this.config.meterName);
-    this.log.info("config apiKey: " + this.config.apiKey);
-    this.log.info("config historyDys: " + this.config.historyDys);
     await this.setObjectNotExistsAsync("testVariable", {
       type: "state",
       common: {
@@ -51,15 +48,14 @@ class Hydrop extends utils.Adapter {
       native: {}
     });
     this.subscribeStates("testVariable");
-    await this.setStateAsync("testVariable", true);
-    await this.setStateAsync("testVariable", { val: true, ack: true });
-    await this.setStateAsync("testVariable", { val: true, ack: true, expire: 30 });
-    let result = await this.checkPasswordAsync("admin", "iobroker");
-    this.log.info("check user admin pw iobroker: " + result);
-    this.log.info("check group user admin group admin: " + result);
+    await this.setState("testVariable", true);
+    await this.setState("testVariable", { val: true, ack: true });
+    await this.setState("testVariable", { val: true, ack: true, expire: 30 });
   }
   /**
    * Is called when adapter shuts down - callback has to be called under any circumstances!
+   *
+   * @param callback
    */
   onUnload(callback) {
     try {
@@ -82,9 +78,6 @@ class Hydrop extends utils.Adapter {
   // 		this.log.info(`object ${id} deleted`);
   // 	}
   // }
-  /**
-   * Is called if a subscribed state changes
-   */
   onStateChange(id, state) {
     if (state) {
       this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
