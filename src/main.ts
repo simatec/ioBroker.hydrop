@@ -118,8 +118,16 @@ class Hydrop extends utils.Adapter {
         }
 
         // Calculate Flow Rate (L/min)
+        if (!oldMeterReading?.val || !oldTimestamp?.val || !meterValue || !timestampUnix) {
+            this.log.debug('Old meter reading or timestamp not available, skipping flow rate calculation');
+            return;
+        }
 
-        // Todo: Implement flow rate calculation based on time difference and consumption
+        const flowRate =
+            ((meterValue - Number(oldMeterReading?.val)) * 1000) / ((timestampUnix - Number(oldTimestamp?.val)) / 60);
+
+        await this.setState('data.averageFlowRate', flowRate, true);
+        this.log.debug(`Calculated Flow Rate: ${flowRate} L/min`);
     }
 
     private async setDayHistory(days: number): Promise<void> {

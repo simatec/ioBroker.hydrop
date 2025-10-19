@@ -117,6 +117,13 @@ class Hydrop extends utils.Adapter {
     } else {
       this.log.debug("Old meter reading not available, skipping consumption calculation");
     }
+    if (!(oldMeterReading == null ? void 0 : oldMeterReading.val) || !(oldTimestamp == null ? void 0 : oldTimestamp.val) || !meterValue || !timestampUnix) {
+      this.log.debug("Old meter reading or timestamp not available, skipping flow rate calculation");
+      return;
+    }
+    const flowRate = (meterValue - Number(oldMeterReading == null ? void 0 : oldMeterReading.val)) * 1e3 / ((timestampUnix - Number(oldTimestamp == null ? void 0 : oldTimestamp.val)) / 60);
+    await this.setState("data.averageFlowRate", flowRate, true);
+    this.log.debug(`Calculated Flow Rate: ${flowRate} L/min`);
   }
   async setDayHistory(days) {
     const historyDays = days - 1;
