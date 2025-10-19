@@ -14,16 +14,12 @@ class Hydrop extends utils.Adapter {
 			name: 'hydrop',
 		});
 		this.on('ready', this.onReady.bind(this));
-		// this.on('stateChange', this.onStateChange.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 	}
 
-	/**
-	 * Is called when databases are connected and adapter received configuration.
-	 */
 	private async onReady(): Promise<void> {
 		this.log.info('Hydrop adapter started');
-
+		await this.createdHistoryStates(this.historyDays);
 		await this.delHistoryStates(this.historyDays);
 		schedule.scheduleJob('dayHistory', '0 0 0 * * *', async () => await this.setDayHistory(this.historyDays));
 	}
@@ -35,11 +31,7 @@ class Hydrop extends utils.Adapter {
 	 */
 	private onUnload(callback: () => void): void {
 		try {
-			// Here you must clear all timeouts or intervals that may still be active
-			// clearTimeout(timeout1);
-			// clearTimeout(timeout2);
-			// ...
-			// clearInterval(interval1);
+			schedule.cancelJob('dayHistory');
 
 			callback();
 		} catch (e) {
@@ -90,6 +82,25 @@ class Hydrop extends utils.Adapter {
 					this.log.warn(`Cannot Delete old History State "${historyName}"`);
 				}
 			}
+		}
+	}
+
+	private async createdHistoryStates(historyDays: number): Promise<void> {
+		for (let c = 0; c < historyDays; c++) {
+			const _historyDays = c + 1;
+
+			await this.setObjectNotExistsAsync(`history.consumption_${_historyDays}_days_ago`, {
+				type: 'state',
+				common: {
+					role: 'value.fill',
+					name: `Daily consumption ${_historyDays} days ago`,
+					type: 'number',
+					read: true,
+					write: false,
+					unit: 'm³',
+				},
+				native: {}
+			});
 		}
 	}
 }
