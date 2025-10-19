@@ -1,11 +1,12 @@
-// The adapter-core module gives you access to the core ioBroker functions
-// you need to create an adapter
 import * as utils from '@iobroker/adapter-core';
-
-// Load your modules here, e.g.:
-// import * as fs from "fs";
+import axios, { type AxiosRequestConfig } from 'axios';
+import schedule from 'node-schedule';
 
 class Hydrop extends utils.Adapter {
+	private apiKey: string = this.config.apiKey;
+	private meterName: string = this.config.meterName;
+	private historyDays: number = this.config.historyDays;
+	private interval: ioBroker.Interval | undefined;
 
 	public constructor(options: Partial<utils.AdapterOptions> = {}) {
 		super({
@@ -13,9 +14,7 @@ class Hydrop extends utils.Adapter {
 			name: 'hydrop',
 		});
 		this.on('ready', this.onReady.bind(this));
-		this.on('stateChange', this.onStateChange.bind(this));
-		// this.on('objectChange', this.onObjectChange.bind(this));
-		// this.on('message', this.onMessage.bind(this));
+		// this.on('stateChange', this.onStateChange.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 	}
 
@@ -23,52 +22,10 @@ class Hydrop extends utils.Adapter {
 	 * Is called when databases are connected and adapter received configuration.
 	 */
 	private async onReady(): Promise<void> {
-		// Initialize your adapter here
+		this.log.info('Hydrop adapter started');
 
-		// The adapters config (in the instance object everything under the attribute "native") is accessible via
-		// this.config:
-		// this.log.info('config meterName: ' + this.config.meterName);
-		// this.log.info('config apiKey: ' + this.config.apiKey);
-		// this.log.info('config historyDays: ' + this.config.historyDays);
-
-		/*
-		For every state in the system there has to be also an object of type state
-		Here a simple template for a boolean variable named "testVariable"
-		Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-		*/
-		await this.setObjectNotExistsAsync('testVariable', {
-			type: 'state',
-			common: {
-				name: 'testVariable',
-				type: 'boolean',
-				role: 'indicator',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
-		this.subscribeStates('testVariable');
-		// You can also add a subscription for multiple states. The following line watches all states starting with "lights."
-		// this.subscribeStates('lights.*');
-		// Or, if you really must, you can also watch all states. Don't do this if you don't need to. Otherwise this will cause a lot of unnecessary load on the system:
-		// this.subscribeStates('*');
-
-		/*
-			setState examples
-			you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-		*/
-		// the variable testVariable is set to true as command (ack=false)
-		await this.setState('testVariable', true);
-
-		// same thing, but the value is flagged "ack"
-		// ack should be always set to true if the value is received from or acknowledged from the target system
-		await this.setState('testVariable', { val: true, ack: true });
-
-		// same thing, but the state is deleted after 30s (getState will return null afterwards)
-		await this.setState('testVariable', { val: true, ack: true, expire: 30 });
-
+		await this.delHistoryStates(this.historyDays);
+		schedule.scheduleJob('dayHistory', '0 0 0 * * *', async () => await this.setDayHistory(this.historyDays));
 	}
 
 	/**
@@ -90,48 +47,51 @@ class Hydrop extends utils.Adapter {
 		}
 	}
 
-	// If you need to react to object changes, uncomment the following block and the corresponding line in the constructor.
-	// You also need to subscribe to the objects with `this.subscribeObjects`, similar to `this.subscribeStates`.
-	// /**
-	//  * Is called if a subscribed object changes
-	//  */
-	// private onObjectChange(id: string, obj: ioBroker.Object | null | undefined): void {
-	// 	if (obj) {
-	// 		// The object was changed
-	// 		this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-	// 	} else {
-	// 		// The object was deleted
-	// 		this.log.info(`object ${id} deleted`);
-	// 	}
-	// }
+	private async setDayHistory(days: number): Promise<void> {
+		const historyDays = days - 1;
 
-	private onStateChange(id: string, state: ioBroker.State | null | undefined): void {
-		if (state) {
-			// The state was changed
-			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-		} else {
-			// The state was deleted
-			this.log.info(`state ${id} deleted`);
+		for (let c = historyDays; c >= 0; c--) {
+			try {
+				let state;
+
+				if (c == 0) {
+					state = await this.getStateAsync('data.dailyConsumption');
+				} else {
+					state = await this.getStateAsync(`history.consumption_${c}_days_ago`);
+				}
+
+				if (state && state.val !== undefined) {
+					const _c = c + 1;
+					await this.setState(`history.consumption_${_c}_days_ago`, state.val, true);
+					this.log.debug(`history consumption ${_c} days ago: ${state.val} m³`);
+				}
+			} catch (err) {
+				this.log.warn(err);
+			}
 		}
+		await this.setState('data.dailyConsumption', 0, true);
 	}
 
-	// If you need to accept messages in your adapter, uncomment the following block and the corresponding line in the constructor.
-	// /**
-	//  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
-	//  * Using this method requires "common.messagebox" property to be set to true in io-package.json
-	//  */
-	// private onMessage(obj: ioBroker.Message): void {
-	// 	if (typeof obj === 'object' && obj.message) {
-	// 		if (obj.command === 'send') {
-	// 			// e.g. send email or pushover or whatever
-	// 			this.log.info('send command');
+	private async delHistoryStates(days: number): Promise<void> {
+		const _historyStates = await this.getForeignObjectsAsync(`${this.namespace}.history.*`);
 
-	// 			// Send response in callback if required
-	// 			if (obj.callback) this.sendTo(obj.from, obj.command, 'Message received', obj.callback);
-	// 		}
-	// 	}
-	// }
+		for (const i in _historyStates) {
+			const historyID = _historyStates[i]._id;
+			const historyName: string = historyID.split('.').pop() ?? '';
+			const parts = historyName.split('_');
+			const parsed = parseInt(parts[1], 10);
+			const historyNumber: number | undefined = !isNaN(parsed) ? parsed : undefined;
 
+			if (historyNumber !== undefined && historyNumber > days) {
+				try {
+					await this.delObjectAsync(historyID);
+					this.log.debug(`Delete old History State "${historyName}"`);
+				} catch (e) {
+					this.log.warn(`Cannot Delete old History State "${historyName}"`);
+				}
+			}
+		}
+	}
 }
 
 if (require.main !== module) {
