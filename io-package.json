@@ -88,5 +88,98 @@
 		"historyDays": "7"
 	},
 	"objects": [],
-	"instanceObjects": []
+	"instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Device or service connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "data",
+      "type": "channel",
+      "common": {
+        "name": "Hydrop Data"
+      },
+      "native": {}
+    },
+    {
+      "_id": "data.meterReading",
+      "type": "state",
+      "common": {
+        "role": "value.fill",
+        "name": "Water meter reading in m³",
+        "type": "number",
+		"unit": "m³",
+        "read": true,
+        "write": false,
+        "def": 0
+      },
+      "native": {}
+    },
+	{
+      "_id": "data.measurementTime",
+      "type": "state",
+      "common": {
+        "role": "value.time",
+        "name": "Measurement time (ISO timestamp)",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": 0
+      },
+      "native": {}
+    },
+	{
+      "_id": "data.averageFlowRate",
+      "type": "state",
+      "common": {
+        "role": "value.fill",
+        "name": "Average flow rate",
+        "type": "number",
+		"unit": "L/min",
+        "read": true,
+        "write": false,
+        "def": 0
+      },
+      "native": {}
+    },
+	{
+      "_id": "data.dailyConsumption",
+      "type": "state",
+      "common": {
+        "role": "value.fill",
+        "name": "Daily consumption in m³",
+        "type": "number",
+		"unit": "m³",
+        "read": true,
+        "write": false,
+        "def": 0
+      },
+      "native": {}
+    },
+	{
+      "_id": "history",
+      "type": "channel",
+      "common": {
+        "name": "History of consumption over the last few days"
+      },
+      "native": {}
+    }
+  ]
 }
