@@ -26,6 +26,8 @@ var import_axios = __toESM(require("axios"));
 var import_node_schedule = __toESM(require("node-schedule"));
 class Hydrop extends utils.Adapter {
   apiBaseUrl = "https://api.hydrop-systems.com";
+  pollInterval = 300;
+  // in minutes
   interval;
   constructor(options = {}) {
     super({
@@ -38,21 +40,82 @@ class Hydrop extends utils.Adapter {
   async onReady() {
     await this.createdHistoryStates(this.config.historyDays);
     await this.delHistoryStates(this.config.historyDays);
-    await this.validateURL();
+    await this.schedulePoll();
     this.log.info("Hydrop adapter started");
-    import_node_schedule.default.scheduleJob("dayHistory", "0 0 0 * * *", async () => await this.setDayHistory(this.config.historyDays));
+    import_node_schedule.default.scheduleJob(
+      "dayHistory",
+      "0 0 0 * * *",
+      async () => await this.setDayHistory(this.config.historyDays)
+    );
   }
-  /**
-   * Is called when adapter shuts down - callback has to be called under any circumstances!
-   *
-   * @param callback
-   */
   onUnload(callback) {
     try {
+      this.clearInterval(this.interval);
       import_node_schedule.default.cancelJob("dayHistory");
       callback();
     } catch (e) {
       callback();
+    }
+  }
+  async schedulePoll() {
+    if (this.config.apiKey === "" || this.config.meterName === "") {
+      this.log.error("API Key or Meter Name not configured. Please check the adapter settings.");
+      return;
+    }
+    await this.poll();
+    this.interval = this.setInterval(() => this.poll(), this.pollInterval * 1e3);
+  }
+  async poll() {
+    var _a, _b, _c, _d, _e, _f;
+    const available = await this.validateURL();
+    if (!available) {
+      this.log.error("Hydrop API not available, skipping poll cycle");
+      return;
+    }
+    try {
+      const hydropRequest = await (0, import_axios.default)({
+        method: "get",
+        url: `${this.apiBaseUrl}/sensors/ID/${this.config.meterName}/newest`,
+        headers: {
+          apikey: this.config.apiKey
+        },
+        timeout: 1e4,
+        responseType: "json"
+      });
+      if ((_d = (_c = (_b = (_a = hydropRequest == null ? void 0 : hydropRequest.data) == null ? void 0 : _a.sensors) == null ? void 0 : _b[0]) == null ? void 0 : _c.records) == null ? void 0 : _d[0]) {
+        const oldMeterReading = (_e = await this.getStateAsync("data.meterReading")) != null ? _e : null;
+        const oldTimestamp = (_f = await this.getStateAsync("data.measurementTime")) != null ? _f : null;
+        const record = hydropRequest.data.sensors[0].records[0];
+        await this.setState("data.meterReading", record.meterValue, true);
+        const timestampUnix = record.timestamp;
+        await this.setState("data.measurementTime", new Date(timestampUnix * 1e3).toISOString(), true);
+        this.log.debug(
+          `Meter Value: ${record.meterValue} m\xB3 at ${new Date(timestampUnix * 1e3).toISOString()}`
+        );
+        await this.calcData(record.meterValue, timestampUnix, oldMeterReading, oldTimestamp);
+      } else {
+        this.log.warn("No valid data received from Hydrop API");
+      }
+    } catch (error) {
+      this.log.error(`Polling error: ${error.message}`);
+    }
+  }
+  async calcData(meterValue, timestampUnix, oldMeterReading, oldTimestamp) {
+    var _a;
+    if (oldMeterReading == null ? void 0 : oldMeterReading.val) {
+      const consumption = meterValue - Number(oldMeterReading.val);
+      if (consumption > 0) {
+        const _dailyConsumption = (_a = await this.getStateAsync("data.dailyConsumption")) == null ? void 0 : _a.val;
+        const newDailyConsumption = _dailyConsumption + consumption;
+        await this.setState("data.dailyConsumption", newDailyConsumption, true);
+        this.log.debug(
+          `Calculated Consumption: ${consumption} m\xB3, Daily Consumption: ${newDailyConsumption} m\xB3`
+        );
+      } else {
+        this.log.debug("No consumption detected (meter value did not increase)");
+      }
+    } else {
+      this.log.debug("Old meter reading not available, skipping consumption calculation");
     }
   }
   async setDayHistory(days) {
@@ -122,13 +185,16 @@ class Hydrop extends utils.Adapter {
       if (response && response.status) {
         this.log.debug(`Hydrop API is available ... Status: ${response.status}`);
         await this.setState("info.connection", true, true);
+        return true;
       } else {
         this.log.warn("Hydrop API did not return a valid response");
         await this.setState("info.connection", false, true);
+        return false;
       }
     } catch (err) {
-      this.log.warn(`Hydrop API is not available: ${err}`);
+      this.log.error(`Hydrop API is not available: ${err}`);
       await this.setState("info.connection", false, true);
+      return false;
     }
   }
 }
