@@ -22,35 +22,25 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var utils = __toESM(require("@iobroker/adapter-core"));
+var import_axios = __toESM(require("axios"));
+var import_node_schedule = __toESM(require("node-schedule"));
 class Hydrop extends utils.Adapter {
+  apiBaseUrl = "https://api.hydrop-systems.com";
+  interval;
   constructor(options = {}) {
     super({
       ...options,
       name: "hydrop"
     });
     this.on("ready", this.onReady.bind(this));
-    this.on("stateChange", this.onStateChange.bind(this));
     this.on("unload", this.onUnload.bind(this));
   }
-  /**
-   * Is called when databases are connected and adapter received configuration.
-   */
   async onReady() {
-    await this.setObjectNotExistsAsync("testVariable", {
-      type: "state",
-      common: {
-        name: "testVariable",
-        type: "boolean",
-        role: "indicator",
-        read: true,
-        write: true
-      },
-      native: {}
-    });
-    this.subscribeStates("testVariable");
-    await this.setState("testVariable", true);
-    await this.setState("testVariable", { val: true, ack: true });
-    await this.setState("testVariable", { val: true, ack: true, expire: 30 });
+    await this.createdHistoryStates(this.config.historyDays);
+    await this.delHistoryStates(this.config.historyDays);
+    await this.validateURL();
+    this.log.info("Hydrop adapter started");
+    import_node_schedule.default.scheduleJob("dayHistory", "0 0 0 * * *", async () => await this.setDayHistory(this.config.historyDays));
   }
   /**
    * Is called when adapter shuts down - callback has to be called under any circumstances!
@@ -59,47 +49,88 @@ class Hydrop extends utils.Adapter {
    */
   onUnload(callback) {
     try {
+      import_node_schedule.default.cancelJob("dayHistory");
       callback();
     } catch (e) {
       callback();
     }
   }
-  // If you need to react to object changes, uncomment the following block and the corresponding line in the constructor.
-  // You also need to subscribe to the objects with `this.subscribeObjects`, similar to `this.subscribeStates`.
-  // /**
-  //  * Is called if a subscribed object changes
-  //  */
-  // private onObjectChange(id: string, obj: ioBroker.Object | null | undefined): void {
-  // 	if (obj) {
-  // 		// The object was changed
-  // 		this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-  // 	} else {
-  // 		// The object was deleted
-  // 		this.log.info(`object ${id} deleted`);
-  // 	}
-  // }
-  onStateChange(id, state) {
-    if (state) {
-      this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-    } else {
-      this.log.info(`state ${id} deleted`);
+  async setDayHistory(days) {
+    const historyDays = days - 1;
+    for (let c = historyDays; c >= 0; c--) {
+      try {
+        let state;
+        if (c == 0) {
+          state = await this.getStateAsync("data.dailyConsumption");
+        } else {
+          state = await this.getStateAsync(`history.consumption_${c}_days_ago`);
+        }
+        if (state && state.val !== void 0) {
+          const _c = c + 1;
+          await this.setState(`history.consumption_${_c}_days_ago`, state.val, true);
+          this.log.debug(`history consumption ${_c} days ago: ${state.val} m\xB3`);
+        }
+      } catch (err) {
+        this.log.warn(err);
+      }
+    }
+    await this.setState("data.dailyConsumption", 0, true);
+  }
+  async delHistoryStates(days) {
+    var _a;
+    const _historyStates = await this.getForeignObjectsAsync(`${this.namespace}.history.*`);
+    for (const i in _historyStates) {
+      const historyID = _historyStates[i]._id;
+      const historyName = (_a = historyID.split(".").pop()) != null ? _a : "";
+      const parts = historyName.split("_");
+      const parsed = parseInt(parts[1], 10);
+      const historyNumber = !isNaN(parsed) ? parsed : void 0;
+      if (historyNumber !== void 0 && historyNumber > days) {
+        try {
+          await this.delObjectAsync(historyID);
+          this.log.debug(`Delete old History State "${historyName}"`);
+        } catch (e) {
+          this.log.warn(`Cannot Delete old History State "${historyName}"`);
+        }
+      }
     }
   }
-  // If you need to accept messages in your adapter, uncomment the following block and the corresponding line in the constructor.
-  // /**
-  //  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
-  //  * Using this method requires "common.messagebox" property to be set to true in io-package.json
-  //  */
-  // private onMessage(obj: ioBroker.Message): void {
-  // 	if (typeof obj === 'object' && obj.message) {
-  // 		if (obj.command === 'send') {
-  // 			// e.g. send email or pushover or whatever
-  // 			this.log.info('send command');
-  // 			// Send response in callback if required
-  // 			if (obj.callback) this.sendTo(obj.from, obj.command, 'Message received', obj.callback);
-  // 		}
-  // 	}
-  // }
+  async createdHistoryStates(historyDays) {
+    for (let c = 0; c < historyDays; c++) {
+      const _historyDays = c + 1;
+      await this.setObjectNotExistsAsync(`history.consumption_${_historyDays}_days_ago`, {
+        type: "state",
+        common: {
+          role: "value.fill",
+          name: `Daily consumption ${_historyDays} days ago`,
+          type: "number",
+          read: true,
+          write: false,
+          unit: "m\xB3",
+          def: 0
+        },
+        native: {}
+      });
+    }
+  }
+  async validateURL() {
+    try {
+      const response = await import_axios.default.get(this.apiBaseUrl, {
+        timeout: 1e4,
+        validateStatus: () => true
+      });
+      if (response && response.status) {
+        this.log.debug(`Hydrop API is available ... Status: ${response.status}`);
+        await this.setState("info.connection", true, true);
+      } else {
+        this.log.warn("Hydrop API did not return a valid response");
+        await this.setState("info.connection", false, true);
+      }
+    } catch (err) {
+      this.log.warn(`Hydrop API is not available: ${err}`);
+      await this.setState("info.connection", false, true);
+    }
+  }
 }
 if (require.main !== module) {
   module.exports = (options) => new Hydrop(options);

@@ -3,9 +3,7 @@ import axios, { type AxiosRequestConfig } from 'axios';
 import schedule from 'node-schedule';
 
 class Hydrop extends utils.Adapter {
-	private apiKey: string = this.config.apiKey;
-	private meterName: string = this.config.meterName;
-	private historyDays: number = this.config.historyDays;
+	private apiBaseUrl: string = 'https://api.hydrop-systems.com';
 	private interval: ioBroker.Interval | undefined;
 
 	public constructor(options: Partial<utils.AdapterOptions> = {}) {
@@ -18,10 +16,13 @@ class Hydrop extends utils.Adapter {
 	}
 
 	private async onReady(): Promise<void> {
+		await this.createdHistoryStates(this.config.historyDays);
+		await this.delHistoryStates(this.config.historyDays);
+
+		await this.validateURL();
 		this.log.info('Hydrop adapter started');
-		await this.createdHistoryStates(this.historyDays);
-		await this.delHistoryStates(this.historyDays);
-		schedule.scheduleJob('dayHistory', '0 0 0 * * *', async () => await this.setDayHistory(this.historyDays));
+
+		schedule.scheduleJob('dayHistory', '0 0 0 * * *', async () => await this.setDayHistory(this.config.historyDays));
 	}
 
 	/**
@@ -98,9 +99,29 @@ class Hydrop extends utils.Adapter {
 					read: true,
 					write: false,
 					unit: 'm³',
+					def: 0,
 				},
 				native: {}
 			});
+		}
+	}
+
+	private async validateURL(): Promise<void> {
+		try {
+			const response = await axios.get(this.apiBaseUrl, {
+				timeout: 10000,
+				validateStatus: () => true
+			});
+			if (response && response.status) {
+				this.log.debug(`Hydrop API is available ... Status: ${response.status}`);
+				await this.setState('info.connection', true, true);
+			} else {
+				this.log.warn('Hydrop API did not return a valid response');
+				await this.setState('info.connection', false, true);
+			}
+		} catch (err) {
+			this.log.warn(`Hydrop API is not available: ${err}`);
+			await this.setState('info.connection', false, true);
 		}
 	}
 }

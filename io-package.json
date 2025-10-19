@@ -78,14 +78,14 @@
 		],
 		"globalDependencies": [
 			{
-				"admin": "7.0.23"
+				"admin": ">=7.0.23"
 			}
 		]
 	},
 	"native": {
 		"meterName": "",
 		"apiKey": "",
-		"historyDays": "7"
+		"historyDays": 7
 	},
 	"objects": [],
 	"instanceObjects": [
