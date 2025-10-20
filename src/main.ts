@@ -4,7 +4,7 @@ import schedule from 'node-schedule';
 
 class Hydrop extends utils.Adapter {
     private apiBaseUrl: string = 'https://api.hydrop-systems.com';
-    private pollInterval: number = 300; // in minutes
+    private pollInterval: number = 5; // in minutes
     private interval: ioBroker.Interval | undefined;
     private lastMeterReading: number | null = null;
     private meterReading: number = 0;
@@ -59,7 +59,7 @@ class Hydrop extends utils.Adapter {
         }
 
         await this.poll();
-        this.interval = this.setInterval(() => this.poll(), this.pollInterval * 1000);
+        this.interval = this.setInterval(() => this.poll(), this.pollInterval * 60_000);
     }
 
     private async poll(): Promise<void> {
@@ -124,7 +124,7 @@ class Hydrop extends utils.Adapter {
         }
 
         // Calculate Flow Rate (L/min)
-        if (!this.lastMeterReading || !this.lastTimestampUnix || !this.meterReading || !this.timestampUnix) {
+        if (!this.lastMeterReading || !this.lastTimestampUnix || this.meterReading === null || !this.timestampUnix) {
             this.log.debug('Old meter reading or timestamp not available, skipping flow rate calculation');
             return;
         }

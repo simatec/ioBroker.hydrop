@@ -26,7 +26,7 @@ var import_axios = __toESM(require("axios"));
 var import_node_schedule = __toESM(require("node-schedule"));
 class Hydrop extends utils.Adapter {
   apiBaseUrl = "https://api.hydrop-systems.com";
-  pollInterval = 300;
+  pollInterval = 5;
   // in minutes
   interval;
   lastMeterReading = null;
@@ -73,7 +73,7 @@ class Hydrop extends utils.Adapter {
       return;
     }
     await this.poll();
-    this.interval = this.setInterval(() => this.poll(), this.pollInterval * 1e3);
+    this.interval = this.setInterval(() => this.poll(), this.pollInterval * 6e4);
   }
   async poll() {
     var _a, _b, _c, _d;
@@ -125,7 +125,7 @@ class Hydrop extends utils.Adapter {
     } else {
       this.log.debug("Old meter reading not available, skipping consumption calculation");
     }
-    if (!this.lastMeterReading || !this.lastTimestampUnix || !this.meterReading || !this.timestampUnix) {
+    if (!this.lastMeterReading || !this.lastTimestampUnix || this.meterReading === null || !this.timestampUnix) {
       this.log.debug("Old meter reading or timestamp not available, skipping flow rate calculation");
       return;
     }

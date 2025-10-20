@@ -36,7 +36,17 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## hydrop adapter for ioBroker
 
-Hydrop Systems
+To integrate your hydropmeter into ioBroker, you will need the following: 
+
+* An account in the hydrop app (available for Android and iOS)
+* The name you gave your hydropmeter in the app
+* Your personal API key for the hydrop REST API
+
+If you do not yet have an API key, please send a request by email to support@hydrop-systems.com
+
+Once you have all the information ready, you can get started. 
+Data is queried in IOBroker every 5 minutes.
+
 
 *****
 
@@ -45,6 +55,7 @@ Hydrop Systems
 ### **WORK IN PROGRESS**
 * (simatec) Trusted Publisher added
 * (simatec) Source code improved
+* (simatec) Readme added
 
 ### 0.0.2 (2025-10-19)
 * (simatec) initial release
