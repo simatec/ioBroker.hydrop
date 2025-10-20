@@ -6,6 +6,17 @@ class Hydrop extends utils.Adapter {
     private apiBaseUrl: string = 'https://api.hydrop-systems.com';
     private pollInterval: number = 300; // in minutes
     private interval: ioBroker.Interval | undefined;
+    private lastMeterReading: number | null = null;
+    private meterReading: number = 0;
+    private lastTimestampUnix: number | null = null;
+    private consumption: number = 0;
+    private flowRate: number = 0;
+    private timestampUnix: number = 0;
+    private apiKey: string = '';
+    private meterName: string = '';
+    private historyDays: number = 7;
+    private dailyConsumption: number = 0;
+    private newDailyConsumption: number = 0;
 
     public constructor(options: Partial<utils.AdapterOptions> = {}) {
         super({
@@ -17,17 +28,18 @@ class Hydrop extends utils.Adapter {
     }
 
     private async onReady(): Promise<void> {
-        await this.createdHistoryStates(this.config.historyDays);
-        await this.delHistoryStates(this.config.historyDays);
+        this.apiKey = this.config.apiKey || '';
+        this.meterName = this.config.meterName || '';
+        this.historyDays = this.config.historyDays || 7;
+
+        // Initialize states
+        await this.createdHistoryStates();
+        await this.delHistoryStates();
 
         await this.schedulePoll();
         this.log.info('Hydrop adapter started');
 
-        schedule.scheduleJob(
-            'dayHistory',
-            '0 0 0 * * *',
-            async () => await this.setDayHistory(this.config.historyDays),
-        );
+        schedule.scheduleJob('dayHistory', '0 0 0 * * *', async () => await this.setDayHistory());
     }
 
     private onUnload(callback: () => void): void {
@@ -41,7 +53,7 @@ class Hydrop extends utils.Adapter {
     }
 
     private async schedulePoll(): Promise<void> {
-        if (this.config.apiKey === '' || this.config.meterName === '') {
+        if (this.apiKey === '' || this.meterName === '') {
             this.log.error('API Key or Meter Name not configured. Please check the adapter settings.');
             return;
         }
@@ -60,30 +72,28 @@ class Hydrop extends utils.Adapter {
         try {
             const hydropRequest = await axios({
                 method: 'get',
-                url: `${this.apiBaseUrl}/sensors/ID/${this.config.meterName}/newest`,
+                url: `${this.apiBaseUrl}/sensors/ID/${this.meterName}/newest`,
                 headers: {
-                    apikey: this.config.apiKey,
+                    apikey: this.apiKey,
                 },
                 timeout: 10000,
                 responseType: 'json',
             });
 
             if (hydropRequest?.data?.sensors?.[0]?.records?.[0]) {
-                const oldMeterReading: ioBroker.State | null = (await this.getStateAsync('data.meterReading')) ?? null;
-                const oldTimestamp: ioBroker.State | null = (await this.getStateAsync('data.measurementTime')) ?? null;
-
                 const record = hydropRequest.data.sensors[0].records[0];
 
+                this.meterReading = record.meterValue;
                 await this.setState('data.meterReading', record.meterValue, true);
 
-                const timestampUnix = record.timestamp;
-                await this.setState('data.measurementTime', new Date(timestampUnix * 1000).toISOString(), true);
+                this.timestampUnix = record.timestamp;
+                await this.setState('data.measurementTime', new Date(this.timestampUnix * 1000).toISOString(), true);
 
                 this.log.debug(
-                    `Meter Value: ${record.meterValue} m³ at ${new Date(timestampUnix * 1000).toISOString()}`,
+                    `Meter Value: ${record.meterValue} m³ at ${new Date(this.timestampUnix * 1000).toISOString()}`,
                 );
 
-                await this.calcData(record.meterValue, timestampUnix, oldMeterReading, oldTimestamp);
+                await this.calcData();
             } else {
                 this.log.warn('No valid data received from Hydrop API');
             }
@@ -92,23 +102,19 @@ class Hydrop extends utils.Adapter {
         }
     }
 
-    private async calcData(
-        meterValue: number,
-        timestampUnix: number,
-        oldMeterReading: ioBroker.State | null,
-        oldTimestamp: ioBroker.State | null,
-    ): Promise<void> {
+    private async calcData(): Promise<void> {
         // Calculate Consumption
-        if (oldMeterReading?.val) {
-            const consumption = meterValue - Number(oldMeterReading.val);
-            if (consumption > 0) {
-                const _dailyConsumption = (await this.getStateAsync('data.dailyConsumption'))?.val as number;
-                const newDailyConsumption = _dailyConsumption + consumption;
+        if (this.lastMeterReading !== null) {
+            this.consumption = this.meterReading - this.lastMeterReading;
 
-                await this.setState('data.dailyConsumption', newDailyConsumption, true);
+            if (this.consumption > 0) {
+                this.newDailyConsumption = this.dailyConsumption + this.consumption;
+
+                await this.setState('data.dailyConsumption', this.newDailyConsumption, true);
+                this.dailyConsumption = this.newDailyConsumption;
 
                 this.log.debug(
-                    `Calculated Consumption: ${consumption} m³, Daily Consumption: ${newDailyConsumption} m³`,
+                    `Calculated Consumption: ${this.consumption} m³, Daily Consumption: ${this.newDailyConsumption} m³`,
                 );
             } else {
                 this.log.debug('No consumption detected (meter value did not increase)');
@@ -118,20 +124,24 @@ class Hydrop extends utils.Adapter {
         }
 
         // Calculate Flow Rate (L/min)
-        if (!oldMeterReading?.val || !oldTimestamp?.val || !meterValue || !timestampUnix) {
+        if (!this.lastMeterReading || !this.lastTimestampUnix || !this.meterReading || !this.timestampUnix) {
             this.log.debug('Old meter reading or timestamp not available, skipping flow rate calculation');
             return;
         }
 
-        const flowRate =
-            ((meterValue - Number(oldMeterReading?.val)) * 1000) / ((timestampUnix - Number(oldTimestamp?.val)) / 60);
+        this.flowRate =
+            ((this.meterReading - Number(this.lastMeterReading)) * 1000) /
+            ((this.timestampUnix - Number(this.lastTimestampUnix)) / 60);
 
-        await this.setState('data.averageFlowRate', flowRate, true);
-        this.log.debug(`Calculated Flow Rate: ${flowRate} L/min`);
+        await this.setState('data.averageFlowRate', this.flowRate, true);
+        this.log.debug(`Calculated Flow Rate: ${this.flowRate} L/min`);
+
+        this.lastMeterReading = this.meterReading;
+        this.lastTimestampUnix = this.timestampUnix;
     }
 
-    private async setDayHistory(days: number): Promise<void> {
-        const historyDays = days - 1;
+    private async setDayHistory(): Promise<void> {
+        const historyDays = this.historyDays - 1;
 
         for (let c = historyDays; c >= 0; c--) {
             try {
@@ -155,7 +165,7 @@ class Hydrop extends utils.Adapter {
         await this.setState('data.dailyConsumption', 0, true);
     }
 
-    private async delHistoryStates(days: number): Promise<void> {
+    private async delHistoryStates(): Promise<void> {
         const _historyStates = await this.getForeignObjectsAsync(`${this.namespace}.history.*`);
 
         for (const i in _historyStates) {
@@ -165,7 +175,7 @@ class Hydrop extends utils.Adapter {
             const parsed = parseInt(parts[1], 10);
             const historyNumber: number | undefined = !isNaN(parsed) ? parsed : undefined;
 
-            if (historyNumber !== undefined && historyNumber > days) {
+            if (historyNumber !== undefined && historyNumber > this.historyDays) {
                 try {
                     await this.delObjectAsync(historyID);
                     this.log.debug(`Delete old History State "${historyName}"`);
@@ -176,8 +186,8 @@ class Hydrop extends utils.Adapter {
         }
     }
 
-    private async createdHistoryStates(historyDays: number): Promise<void> {
-        for (let c = 0; c < historyDays; c++) {
+    private async createdHistoryStates(): Promise<void> {
+        for (let c = 0; c < this.historyDays; c++) {
             const _historyDays = c + 1;
 
             await this.setObjectNotExistsAsync(`history.consumption_${_historyDays}_days_ago`, {

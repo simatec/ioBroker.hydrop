@@ -44,6 +44,7 @@ Hydrop Systems
 <!-- ### **WORK IN PROGRESS** -->
 ### **WORK IN PROGRESS**
 * (simatec) Trusted Publisher added
+* (simatec) Source code improved
 
 ### 0.0.2 (2025-10-19)
 * (simatec) initial release
