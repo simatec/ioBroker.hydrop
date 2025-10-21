@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "hydrop",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "news": {
+      "0.0.3": {
+        "en": "Trusted Publisher added\nSource code improved\nReadme added",
+        "de": "Trusted Publisher hinzugefügt\nQuellcode verbessert\nReader hinzugefügt",
+        "ru": "Доверенный издатель добавил\nИсходный код улучшен\nReadme добавлено",
+        "pt": "Editor confiável adicionado\nCódigo-fonte melhorado\nReadme adicionado",
+        "nl": "Vertrouwde uitgever toegevoegd\nBroncode verbeterd\nLezen toegevoegd",
+        "fr": "Éditeur fiable ajouté\nCode source amélioré\nLire ajouté",
+        "it": "Trusted Publisher aggiunto\nCodice sorgente migliorato\nLeggime aggiunto",
+        "es": "Trusted Publisher añadido\nMejoramiento del código fuente\nReadme added",
+        "pl": "Dodano zaufany wydawca\nPoprawiony kod źródłowy\nReadme added",
+        "uk": "Довірений видавець\nКод джерела покращений\nГотове додано",
+        "zh-cn": "添加了信任的出版商\n源代码改进\n已读取"
+      },
       "0.0.2": {
         "en": "initial release",
         "de": "erstausstrahlung",
