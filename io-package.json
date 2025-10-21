@@ -151,10 +151,9 @@
       "common": {
         "role": "value.time",
         "name": "Measurement time (ISO timestamp)",
-        "type": "number",
+        "type": "string",
         "read": true,
-        "write": false,
-        "def": 0
+        "write": false
       },
       "native": {}
     },

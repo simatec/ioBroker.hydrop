@@ -26,6 +26,7 @@ var import_axios = __toESM(require("axios"));
 var import_node_schedule = __toESM(require("node-schedule"));
 class Hydrop extends utils.Adapter {
   apiBaseUrl = "https://api.hydrop-systems.com";
+  url = "";
   pollInterval = 5;
   // in minutes
   interval;
@@ -52,10 +53,11 @@ class Hydrop extends utils.Adapter {
     this.apiKey = this.config.apiKey || "";
     this.meterName = this.config.meterName || "";
     this.historyDays = this.config.historyDays || 7;
+    this.url = `${this.apiBaseUrl}/sensors/ID/${this.meterName}/newest`;
     await this.createdHistoryStates();
     await this.delHistoryStates();
-    await this.schedulePoll();
     this.log.info("Hydrop adapter started");
+    await this.schedulePoll();
     import_node_schedule.default.scheduleJob("dayHistory", "0 0 0 * * *", async () => await this.setDayHistory());
   }
   onUnload(callback) {
@@ -85,7 +87,7 @@ class Hydrop extends utils.Adapter {
     try {
       const hydropRequest = await (0, import_axios.default)({
         method: "get",
-        url: `${this.apiBaseUrl}/sensors/ID/${this.meterName}/newest`,
+        url: this.url,
         headers: {
           apikey: this.apiKey
         },
@@ -123,17 +125,19 @@ class Hydrop extends utils.Adapter {
         this.log.debug("No consumption detected (meter value did not increase)");
       }
     } else {
-      this.log.debug("Old meter reading not available, skipping consumption calculation");
+      this.log.debug("last meter reading not available, skipping consumption calculation");
     }
-    if (!this.lastMeterReading || !this.lastTimestampUnix || this.meterReading === null || !this.timestampUnix) {
-      this.log.debug("Old meter reading or timestamp not available, skipping flow rate calculation");
+    if (this.lastMeterReading === null || this.lastTimestampUnix === null || this.meterReading === null || this.timestampUnix === null) {
+      this.lastMeterReading = this.meterReading ? this.meterReading : null;
+      this.lastTimestampUnix = this.timestampUnix ? this.timestampUnix : null;
+      this.log.debug("last meter reading or timestamp not available, skipping flow rate calculation");
       return;
     }
     this.flowRate = (this.meterReading - Number(this.lastMeterReading)) * 1e3 / ((this.timestampUnix - Number(this.lastTimestampUnix)) / 60);
     await this.setState("data.averageFlowRate", this.flowRate, true);
     this.log.debug(`Calculated Flow Rate: ${this.flowRate} L/min`);
-    this.lastMeterReading = this.meterReading;
-    this.lastTimestampUnix = this.timestampUnix;
+    this.lastMeterReading = this.meterReading ? this.meterReading : null;
+    this.lastTimestampUnix = this.timestampUnix ? this.timestampUnix : null;
   }
   async setDayHistory() {
     const historyDays = this.historyDays - 1;
