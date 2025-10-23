@@ -91,15 +91,21 @@
     ],
     "globalDependencies": [
       {
-        "admin": ">=7.0.23"
+        "admin": ">=7.4.10"
       }
     ]
   },
   "native": {
-    "meterName": "",
     "apiKey": "",
-    "historyDays": 7
+    "historyDays": 7,
+    "meterName": ""
   },
+  "encryptedNative": [
+    "apiKey"
+  ],
+  "protectedNative": [
+    "apiKey"
+  ],
   "objects": [],
   "instanceObjects": [
     {
