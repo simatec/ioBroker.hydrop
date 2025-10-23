@@ -92,7 +92,7 @@
       tooltip: 'Hydrop Systems',
       noTranslation: true,
       href: 'https://hydrop-systems.com',
-      src: 'hydrop_Banner_v1.png',
+      src: 'hydrop_banner.png',
       newLine: true,
       xs: 12,
       sm: 12,
