@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "hydrop",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "news": {
+      "0.0.4": {
+        "en": "many small fixes",
+        "de": "viele kleine fixierungen",
+        "ru": "много маленьких фикс",
+        "pt": "muitas pequenas correções",
+        "nl": "veel kleine fixes",
+        "fr": "de nombreuses petites corrections",
+        "it": "molte piccole correzioni",
+        "es": "muchos pequeños arreglos",
+        "pl": "wiele małych poprawek",
+        "uk": "багато маленьких фіксаторів",
+        "zh-cn": "许多小修正"
+      },
       "0.0.3": {
         "en": "Trusted Publisher added\nSource code improved\nReadme added",
         "de": "Trusted Publisher hinzugefügt\nQuellcode verbessert\nReader hinzugefügt",

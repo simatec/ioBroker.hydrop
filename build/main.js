@@ -97,7 +97,7 @@ class Hydrop extends utils.Adapter {
       if ((_d = (_c = (_b = (_a = hydropRequest == null ? void 0 : hydropRequest.data) == null ? void 0 : _a.sensors) == null ? void 0 : _b[0]) == null ? void 0 : _c.records) == null ? void 0 : _d[0]) {
         const record = hydropRequest.data.sensors[0].records[0];
         this.meterReading = record.meterValue;
-        await this.setState("data.meterReading", record.meterValue, true);
+        await this.setState("data.meterReading", parseFloat(record.meterValue.toFixed(3)), true);
         this.timestampUnix = record.timestamp;
         await this.setState("data.measurementTime", new Date(this.timestampUnix * 1e3).toISOString(), true);
         this.log.debug(
@@ -116,7 +116,7 @@ class Hydrop extends utils.Adapter {
       this.consumption = this.meterReading - this.lastMeterReading;
       if (this.consumption > 0) {
         this.newDailyConsumption = this.dailyConsumption + this.consumption;
-        await this.setState("data.dailyConsumption", this.newDailyConsumption, true);
+        await this.setState("data.dailyConsumption", parseFloat(this.newDailyConsumption.toFixed(3)), true);
         this.dailyConsumption = this.newDailyConsumption;
         this.log.debug(
           `Calculated Consumption: ${this.consumption} m\xB3, Daily Consumption: ${this.newDailyConsumption} m\xB3`
@@ -134,7 +134,7 @@ class Hydrop extends utils.Adapter {
       return;
     }
     this.flowRate = (this.meterReading - Number(this.lastMeterReading)) * 1e3 / ((this.timestampUnix - Number(this.lastTimestampUnix)) / 60);
-    await this.setState("data.averageFlowRate", this.flowRate, true);
+    await this.setState("data.averageFlowRate", parseFloat(this.flowRate.toFixed(3)), true);
     this.log.debug(`Calculated Flow Rate: ${this.flowRate} L/min`);
     this.lastMeterReading = this.meterReading ? this.meterReading : null;
     this.lastTimestampUnix = this.timestampUnix ? this.timestampUnix : null;
