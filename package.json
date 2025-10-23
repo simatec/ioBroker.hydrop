@@ -12,7 +12,9 @@
     "Water meter",
     "water consumption",
     "water",
-    "water damage"
+    "water damage",
+    "ioBroker",
+    "ioBroker adapter"
   ],
   "repository": {
     "type": "git",
