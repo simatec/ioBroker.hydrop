@@ -171,6 +171,7 @@ class Hydrop extends utils.Adapter {
                 this.log.warn(err);
             }
         }
+        this.dailyConsumption = 0;
         await this.setState('data.dailyConsumption', 0, true);
     }
 
