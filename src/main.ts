@@ -37,6 +37,7 @@ class Hydrop extends utils.Adapter {
         // Initialize states
         await this.createdHistoryStates();
         await this.delHistoryStates();
+        await this.getCurrentStates();
 
         this.log.info('Hydrop adapter started');
         await this.schedulePoll();
@@ -51,6 +52,33 @@ class Hydrop extends utils.Adapter {
             callback();
         } catch (e) {
             callback();
+        }
+    }
+
+    private async getCurrentStates(): Promise<void> {
+        try {
+            const dailyState = await this.getStateAsync('data.dailyConsumption');
+
+            if (dailyState && dailyState.val !== undefined) {
+                this.dailyConsumption = Number(dailyState.val);
+                this.log.debug(`Current daily consumption loaded: ${this.dailyConsumption} m³`);
+            }
+
+            const lastMeterState = await this.getStateAsync('data.meterReading');
+
+            if (lastMeterState && lastMeterState.val !== undefined) {
+                this.lastMeterReading = Number(lastMeterState.val);
+                this.log.debug(`Last meter reading loaded: ${this.lastMeterReading} m³`);
+            }
+
+            const lastUnixTimestampState = await this.getStateAsync('data.UnixMeasurementTime');
+
+            if (lastUnixTimestampState && lastUnixTimestampState.val !== undefined) {
+                this.lastTimestampUnix = Number(lastUnixTimestampState.val);
+                this.log.debug(`Last Unix timestamp loaded: ${this.lastTimestampUnix}`);
+            }
+        } catch (err) {
+            this.log.warn(`Error loading current states: ${err}`);
         }
     }
 
@@ -89,10 +117,11 @@ class Hydrop extends utils.Adapter {
                 await this.setState('data.meterReading', parseFloat(record.meterValue.toFixed(3)), true);
 
                 this.timestampUnix = record.timestamp;
+                await this.setState('data.UnixMeasurementTime', this.timestampUnix, true);
                 await this.setState('data.measurementTime', new Date(this.timestampUnix * 1000).toISOString(), true);
 
                 this.log.debug(
-                    `Meter Value: ${record.meterValue} m³ at ${new Date(this.timestampUnix * 1000).toISOString()}`,
+                    `Meter Value: ${parseFloat(record.meterValue.toFixed(3))} m³ at ${new Date(this.timestampUnix * 1000).toISOString()}`,
                 );
 
                 await this.calcData();
@@ -116,7 +145,7 @@ class Hydrop extends utils.Adapter {
                 this.dailyConsumption = this.newDailyConsumption;
 
                 this.log.debug(
-                    `Calculated Consumption: ${this.consumption} m³, Daily Consumption: ${this.newDailyConsumption} m³`,
+                    `Calculated Consumption: ${parseFloat(this.consumption.toFixed(3))} m³, Daily Consumption: ${parseFloat(this.newDailyConsumption.toFixed(3))} m³`,
                 );
             } else {
                 this.log.debug('No consumption detected (meter value did not increase)');
@@ -142,8 +171,14 @@ class Hydrop extends utils.Adapter {
             ((this.meterReading - Number(this.lastMeterReading)) * 1000) /
             ((this.timestampUnix - Number(this.lastTimestampUnix)) / 60);
 
-        await this.setState('data.averageFlowRate', parseFloat(this.flowRate.toFixed(3)), true);
-        this.log.debug(`Calculated Flow Rate: ${this.flowRate} L/min`);
+        await this.setState(
+            'data.averageFlowRate',
+            parseFloat(this.flowRate.toFixed(3)) > 0 ? parseFloat(this.flowRate.toFixed(3)) : 0,
+            true,
+        );
+        this.log.debug(
+            `Calculated Flow Rate: ${typeof parseFloat(this.flowRate.toFixed(3)) === 'number' ? parseFloat(this.flowRate.toFixed(3)) : 0} L/min`,
+        );
 
         this.lastMeterReading = this.meterReading ? this.meterReading : null;
         this.lastTimestampUnix = this.timestampUnix ? this.timestampUnix : null;

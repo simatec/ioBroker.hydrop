@@ -177,6 +177,19 @@
       "native": {}
     },
     {
+      "_id": "data.UnixMeasurementTime",
+      "type": "state",
+      "common": {
+        "role": "value.time",
+        "name": "Measurement time (Unix timestamp)",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "expert": true
+      },
+      "native": {}
+    },
+    {
       "_id": "data.averageFlowRate",
       "type": "state",
       "common": {
