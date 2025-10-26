@@ -52,7 +52,7 @@ Data is queried in IOBroker every 5 minutes.
 
 ## Changelog
 <!-- ### **WORK IN PROGRESS** -->
-### **WORK IN PROGRESS**
+### 0.0.5 (2025-10-26)
 * (simatec) Fix daily Consumption
 * (simatec) get current states added
 * (simatec) Fix output

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "hydrop",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "news": {
+      "0.0.5": {
+        "en": "Fix daily Consumption\nget current states added\nFix output",
+        "de": "Täglicher Verbrauch\naktuelle zustände hinzugefügt\nFeste Ausgabe",
+        "ru": "Фиксировать ежедневное потребление\nдобавить текущие состояния\nФиксированный выход",
+        "pt": "Corrigir o consumo diário\nobter estados atuais adicionados\nCorrigir a saída",
+        "nl": "Repareren dagelijks verbruik\nhuidige status toevoegen\nUitvoer herstellen",
+        "fr": "Fixer la consommation quotidienne\najouter les états actuels\nCorrection de la sortie",
+        "it": "Fissare il consumo giornaliero\nottenere stati attuali aggiunto\nUscita di fissaggio",
+        "es": "Fijar el consumo diario\nobtener estados actuales añadidos\nSalida fija",
+        "pl": "Napraw dzienne zużycie\nget current state added\nPopraw wyjście",
+        "uk": "Фіксація щоденного споживання\nотримувати поточні стани додано\nФіксований вихід",
+        "zh-cn": "每日消费\n添加当前状态\n修正输出"
+      },
       "0.0.4": {
         "en": "many small fixes",
         "de": "viele kleine fixierungen",
