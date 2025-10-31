@@ -221,9 +221,9 @@
       "type": "state",
       "common": {
         "role": "value.fill",
-        "name": "Daily consumption in m³",
+        "name": "Daily consumption in liters",
         "type": "number",
-        "unit": "m³",
+        "unit": "l",
         "read": true,
         "write": false,
         "def": 0

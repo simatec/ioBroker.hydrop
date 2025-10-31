@@ -114,14 +114,14 @@ class Hydrop extends utils.Adapter {
                 const record = hydropRequest.data.sensors[0].records[0];
 
                 this.meterReading = record.meterValue;
-                await this.setState('data.meterReading', parseFloat(record.meterValue.toFixed(3)), true);
+                await this.setState('data.meterReading', parseFloat(record.meterValue.toFixed(4)), true);
 
                 this.timestampUnix = record.timestamp;
                 await this.setState('data.UnixMeasurementTime', this.timestampUnix, true);
                 await this.setState('data.measurementTime', new Date(this.timestampUnix * 1000).toISOString(), true);
 
                 this.log.debug(
-                    `Meter Value: ${parseFloat(record.meterValue.toFixed(3))} m³ at ${new Date(this.timestampUnix * 1000).toISOString()}`,
+                    `Meter Value: ${parseFloat(record.meterValue.toFixed(4))} m³ at ${new Date(this.timestampUnix * 1000).toISOString()}`,
                 );
 
                 await this.calcData();
@@ -141,11 +141,15 @@ class Hydrop extends utils.Adapter {
             if (this.consumption > 0) {
                 this.newDailyConsumption = this.dailyConsumption + this.consumption;
 
-                await this.setState('data.dailyConsumption', parseFloat(this.newDailyConsumption.toFixed(3)), true);
+                await this.setState(
+                    'data.dailyConsumption',
+                    parseFloat(this.newDailyConsumption.toFixed(4)) * 1000,
+                    true,
+                );
                 this.dailyConsumption = this.newDailyConsumption;
 
                 this.log.debug(
-                    `Calculated Consumption: ${parseFloat(this.consumption.toFixed(3))} m³, Daily Consumption: ${parseFloat(this.newDailyConsumption.toFixed(3))} m³`,
+                    `Calculated Consumption: ${parseFloat(this.consumption.toFixed(3))} m³, Daily Consumption: ${parseFloat(this.newDailyConsumption.toFixed(4)) * 1000} l`,
                 );
             } else {
                 this.log.debug('No consumption detected (meter value did not increase)');
@@ -200,7 +204,7 @@ class Hydrop extends utils.Adapter {
                 if (state && state.val !== undefined) {
                     const _c = c + 1;
                     await this.setState(`history.consumption_${_c}_days_ago`, state.val, true);
-                    this.log.debug(`history consumption ${_c} days ago: ${state.val} m³`);
+                    this.log.debug(`history consumption ${_c} days ago: ${state.val} l`);
                 }
             } catch (err) {
                 this.log.warn(err);
@@ -243,7 +247,7 @@ class Hydrop extends utils.Adapter {
                     type: 'number',
                     read: true,
                     write: false,
-                    unit: 'm³',
+                    unit: 'l',
                     def: 0,
                 },
                 native: {},
