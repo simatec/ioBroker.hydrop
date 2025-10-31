@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "hydrop",
-    "version": "0.0.5",
+    "version": "0.1.0",
     "news": {
+      "0.1.0": {
+        "en": "Fix daily Consumption\nUpdate dependencies",
+        "de": "Täglicher Verbrauch\nAbhängigkeiten aktualisieren",
+        "ru": "Фиксировать ежедневное потребление\nОбновление зависимостей",
+        "pt": "Corrigir o consumo diário\nAtualizar dependências",
+        "nl": "Repareren dagelijks verbruik\nAfhankelijkheden bijwerken",
+        "fr": "Fixer la consommation quotidienne\nMise à jour des dépendances",
+        "it": "Fissare il consumo giornaliero\nDipendenze di aggiornamento",
+        "es": "Fijar el consumo diario\nActualizar las dependencias",
+        "pl": "Napraw dzienne zużycie\nAktualizuj zależności",
+        "uk": "Фіксація щоденного споживання\nОновлення залежності",
+        "zh-cn": "每日消费\n更新依赖关系"
+      },
       "0.0.5": {
         "en": "Fix daily Consumption\nget current states added\nFix output",
         "de": "Täglicher Verbrauch\naktuelle zustände hinzugefügt\nFeste Ausgabe",
