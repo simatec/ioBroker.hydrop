@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "hydrop",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "news": {
+      "0.1.1": {
+        "en": "Fix for Beta Release",
+        "de": "Fix für Beta Release",
+        "ru": "Fix для бета-версии",
+        "pt": "Corrigir para a libertação beta",
+        "nl": "Fix for Beta Release",
+        "fr": "Correction pour la version bêta",
+        "it": "Fissare per il rilascio Beta",
+        "es": "Corrección para Beta Release",
+        "pl": "Napraw dla Beta Release",
+        "uk": "Виправлення для Beta Release",
+        "zh-cn": "为 Beta 发布修复"
+      },
       "0.1.0": {
         "en": "Fix daily Consumption\nUpdate dependencies",
         "de": "Täglicher Verbrauch\nAbhängigkeiten aktualisieren",
