@@ -62,6 +62,7 @@ If you want to check whether the hydropmeter is compatible with your type of wat
 ## Changelog
 <!-- ### **WORK IN PROGRESS** -->
 ### **WORK IN PROGRESS**
+* (Goriatch) Minified Adapter Logo
 * (Goriatch) Localization, description and branding updates
 
 ### 0.1.2 (2025-11-02)
