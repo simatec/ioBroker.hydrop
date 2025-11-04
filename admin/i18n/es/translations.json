@@ -1,13 +1,13 @@
 {
-	"API Key from Hydrop Systems": "Clave API de Hydrop Systems",
-	"API Key from Hydrop Systems account": "Clave API de la cuenta de Hydrop Systems",
-	"Connect your Hydrop System with ioBroker": "Conecte su sistema Hydrop con ioBroker",
-	"History Days": "Jornadas de Historia",
-	"Hydrop Settings": "Configuración hidropónica",
-	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Si aún no tiene una clave API, envíe una solicitud por correo electrónico a support@hydrop-systems.com",
-	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Si te gusta este proyecto y te gustaría apoyar su desarrollo, puedes dejar una donación.",
-	"Name of the water meter": "Nombre del medidor de agua",
-	"Name of the water meter as defined in your Hydrop account": "Nombre del medidor de agua tal como se define en su cuenta Hydrop",
-	"Number of days to fetch historical data": "Número de días para recuperar datos históricos",
-	"hydrop adapter settings": "Configuración del adaptador para hidrop."
+	"API Key from Hydrop Systems": "Clave API",
+	"API Key from Hydrop Systems account": "La clave API de tu cuenta hydrop",
+	"Connect your Hydrop System with ioBroker": "Conecta tu hydropmeter con ioBroker",
+	"History Days": "Historial (días)",
+	"Hydrop Settings": "Configuración",
+	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Puedes generar una clave API yendo a Configuración ⮕ Cuenta ⮕ Clave API en la app de hydrop.",
+	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Si te gusta este proyecto y quieres apoyar su desarrollo, puedes dejar una donación.",
+	"Name of the water meter": "Nombre del hydropmeter",
+	"Name of the water meter as defined in your Hydrop account": "Nombre asignado al hydropmeter en la app de hydrop",
+	"Number of days to fetch historical data": "Número de días durante los que se guardan datos históricos",
+	"hydrop adapter settings": "Configuración del adaptador hydrop"
 }

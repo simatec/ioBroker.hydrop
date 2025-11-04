@@ -9,10 +9,14 @@
   "homepage": "https://github.com/simatec/ioBroker.hydrop",
   "license": "MIT",
   "keywords": [
-    "Water meter",
+    "water meter",
     "water consumption",
     "water",
     "water damage",
+    "water usage",
+    "hydropmeter",
+    "hydrop systems",
+    "hydrop",
     "ioBroker",
     "ioBroker adapter"
   ],

@@ -1,4 +1,4 @@
-![Logo](admin/hydrop.png)
+![Logo](admin/hydrop_Readme_Logo.png)
 # ioBroker.hydrop
 
 ![Number of Installations](http://iobroker.live/badges/hydrop-installed.svg)
@@ -34,24 +34,36 @@ When the adapter crashes or an other Code error happens, this error message that
 
 *****
 
-## hydrop adapter for ioBroker
+## The hydrop adapter for ioBroker
+
+This adapter allows you to seamlessly integrate your hydropmeter into ioBroker, bringing your water usage into your smart home. To learn more about the hydropmeter and hydrop systems, visit their website: https://hydrop-systems.com
 
 To integrate your hydropmeter into ioBroker, you will need the following: 
 
-* An account in the hydrop app (available for Android and iOS)
+* An account in the hydrop app (available for [Android](https://play.google.com/store/apps/details?id=com.hydropsystems.monitoring&pcampaignid=web_share) and [iOS](https://apps.apple.com/de/app/hydrop/id6740268955))
 * The name you gave your hydropmeter in the app
 * Your personal API key for the hydrop REST API
 
-If you do not yet have an API key, please send a request by email to support@hydrop-systems.com
+You can generate an API key in the hydrop app. Navigate to `Settings`, expand the `Account` section and tap on `API key`. The API key will only be shown once, please make sure to store it in a safe location.
 
-Once you have all the information ready, you can get started. 
-Data is queried in IOBroker every 5 minutes.
+Once you have all the information ready, you can get started. Enter the information in the settings page of your hydrop adapter instance and hit `Save`. The corresponding objects will be created automatically in the object tree.
+Data is queried in ioBroker every 5 minutes.
 
+*****
+
+### How does the hydropmeter work?
+
+The hydropmeter is a smart add-on for your water meter. Using advanced AI-based computer vision, it detects each change in the meter reading and thus creates a detailed, high resolution time series of your water consumption. By monitoring the flow rate, you can spot anomalies and find small leakages. Of course you can also receive alerts if the flow rate exceeds a certain maximum. Using ioBroker, the possibilities are near limitless.
+
+If you want to check whether the hydropmeter is compatible with your type of water meter, please use this tool: https://shop.hydrop-systems.com/zaehlercheck/
 
 *****
 
 ## Changelog
 <!-- ### **WORK IN PROGRESS** -->
+### **WORK IN PROGRESS**
+* (Goriatch) Localization, description and branding updates
+
 ### 0.1.2 (2025-11-02)
 * (simatec) Fix for Beta Release
 

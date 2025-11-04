@@ -3,6 +3,9 @@
 !.vscode/
 !.github/
 
+# No MacOS file system files
+.DS_Store
+
 *.code-workspace
 node_modules
 nbproject

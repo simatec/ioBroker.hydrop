@@ -1,13 +1,13 @@
 {
-	"API Key from Hydrop Systems": "Ключ API от Hydrop Systems",
-	"API Key from Hydrop Systems account": "Ключ API от учетной записи Hydrop Systems",
-	"Connect your Hydrop System with ioBroker": "Подключите свою систему Hydrop к ioBroker",
-	"History Days": "Дни истории",
-	"Hydrop Settings": "Настройки гидроподъёма",
-	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Если у вас еще нет ключа API, отправьте запрос по электронной почте на адрес support@гидроp-systems.com.",
-	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Если вам нравится этот проект и вы хотите поддержать его развитие, вы можете оставить пожертвование.",
-	"Name of the water meter": "Название водомера",
-	"Name of the water meter as defined in your Hydrop account": "Имя счетчика воды, указанное в вашей учетной записи Hydrop.",
-	"Number of days to fetch historical data": "Количество дней для получения исторических данных",
-	"hydrop adapter settings": "Настройки адаптера для гидропа"
+	"API Key from Hydrop Systems": "Ключ API",
+	"API Key from Hydrop Systems account": "Ключ API для вашей учётной записи hydrop",
+	"Connect your Hydrop System with ioBroker": "Подключите ваш hydropmeter к ioBroker",
+	"History Days": "История (дни)",
+	"Hydrop Settings": "Настройки",
+	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Вы можете сгенерировать ключ API в приложении hydrop: Настройки ⮕ Аккаунт ⮕ Ключ API.",
+	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Если вам нравится этот проект и вы хотите поддержать его развитие, вы можете сделать пожертвование.",
+	"Name of the water meter": "Имя hydropmeter",
+	"Name of the water meter as defined in your Hydrop account": "Имя, присвоенное hydropmeter в приложении hydrop",
+	"Number of days to fetch historical data": "Количество дней, в течение которых хранятся исторические данные",
+	"hydrop adapter settings": "Настройки адаптера hydrop"
 }

@@ -1,13 +1,13 @@
 {
-	"API Key from Hydrop Systems": "Klucz API firmy Hydrop Systems",
-	"API Key from Hydrop Systems account": "Klucz API z konta Hydrop Systems",
-	"Connect your Hydrop System with ioBroker": "Połącz swój system Hydrop z ioBrokerem",
-	"History Days": "Dni Historii",
-	"Hydrop Settings": "Ustawienia Hydropu",
-	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Jeśli nie masz jeszcze klucza API, wyślij prośbę e-mailem na adres support@hydrop-systems.com",
-	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Jeśli podoba Ci się ten projekt i chciałbyś wesprzeć jego rozwój, możesz zostawić darowiznę.",
-	"Name of the water meter": "Nazwa wodomierza",
-	"Name of the water meter as defined in your Hydrop account": "Nazwa wodomierza zdefiniowana na Twoim koncie Hydrop",
-	"Number of days to fetch historical data": "Liczba dni pobierania danych historycznych",
-	"hydrop adapter settings": "Ustawienia adaptera dla hydrop"
+	"API Key from Hydrop Systems": "Klucz API",
+	"API Key from Hydrop Systems account": "Klucz API do Twojego konta hydrop",
+	"Connect your Hydrop System with ioBroker": "Połącz swój hydropmeter z ioBroker",
+	"History Days": "Historia (dni)",
+	"Hydrop Settings": "Ustawienia",
+	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Możesz wygenerować klucz API, przechodząc w aplikacji hydrop do Ustawienia ⮕ Konto ⮕ Klucz API.",
+	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Jeśli podoba Ci się ten projekt i chcesz wesprzeć jego rozwój, możesz przekazać darowiznę.",
+	"Name of the water meter": "Nazwa hydropmeter",
+	"Name of the water meter as defined in your Hydrop account": "Nazwa nadana hydropmeter w aplikacji hydrop",
+	"Number of days to fetch historical data": "Liczba dni, przez które przechowywane są dane historyczne",
+	"hydrop adapter settings": "Ustawienia adaptera hydrop"
 }

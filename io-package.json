@@ -96,39 +96,43 @@
       }
     },
     "titleLang": {
-      "en": "Reading and monitoring water meters from Hydrop Systems",
-      "de": "Reading and monitoring water meters from Hydrop Systems",
-      "ru": "Reading and monitoring water meters from Hydrop Systems",
-      "pt": "Reading and monitoring water meters from Hydrop Systems",
-      "nl": "Reading and monitoring water meters from Hydrop Systems",
-      "fr": "Reading and monitoring water meters from Hydrop Systems",
-      "it": "Reading and monitoring water meters from Hydrop Systems",
-      "es": "Reading and monitoring water meters from Hydrop Systems",
-      "pl": "Reading and monitoring water meters from Hydrop Systems",
-      "uk": "Reading and monitoring water meters from Hydrop Systems",
-      "zh-cn": "Reading and monitoring water meters from Hydrop Systems"
+      "en": "Integration for the hydropmeter",
+      "de": "Integration für das hydropmeter",
+      "ru": "Интеграция для hydropmeter",
+      "pt": "Integração para o hydropmeter",
+      "nl": "Integratie voor de hydropmeter",
+      "fr": "Intégration pour l’hydropmeter",
+      "it": "Integrazione per l’hydropmeter",
+      "es": "Integración para el hydropmeter",
+      "pl": "Integracja dla hydropmeter",
+      "uk": "Інтеграція для hydropmeter",
+      "zh-cn": "适用于 hydropmeter 的集成"
     },
     "desc": {
-      "en": "Hydrop Systems",
-      "de": "Hydrop Systems",
-      "ru": "Hydrop Systems",
-      "pt": "Hydrop Systems",
-      "nl": "Hydrop Systems",
-      "fr": "Hydrop Systems",
-      "it": "Hydrop Systems",
-      "es": "Hydrop Systems",
-      "pl": "Hydrop Systems",
-      "uk": "Hydrop Systems",
-      "zh-cn": "Hydrop Systems"
+      "en": "Connect your hydropmeter with ioBroker and monitor your water consumption.",
+      "de": "Verbinde dein hydropmeter mit ioBroker und überwache deinen Wasserverbrauch.",
+      "ru": "Подключите ваш hydropmeter к ioBroker и контролируйте потребление воды.",
+      "pt": "Conecte seu hydropmeter ao ioBroker e monitore seu consumo de água.",
+      "nl": "Verbind je hydropmeter met ioBroker en monitor je waterverbruik.",
+      "fr": "Connectez votre hydropmeter à ioBroker et surveillez votre consommation d’eau.",
+      "it": "Collega il tuo hydropmeter a ioBroker e monitora il tuo consumo d’acqua.",
+      "es": "Conecta tu hydropmeter con ioBroker y controla tu consumo de agua.",
+      "pl": "Połącz swój hydropmeter z ioBroker i monitoruj zużycie wody.",
+      "uk": "Під’єднайте свій hydropmeter до ioBroker та контролюйте споживання води.",
+      "zh-cn": "将你的 hydropmeter 连接到 ioBroker, 并监控你的用水量"
     },
     "authors": [
       "simatec <hydrop@simateccloud.de>"
     ],
     "keywords": [
-      "Water meter",
+      "water meter",
       "water consumption",
       "water",
-      "water damage"
+      "water damage",
+      "water usage",
+      "hydropmeter",
+      "hydrop systems",
+      "hydrop"
     ],
     "licenseInformation": {
       "type": "free",

@@ -1,13 +1,13 @@
 {
-	"API Key from Hydrop Systems": "API-Schlüssel von Hydrop Systems",
-	"API Key from Hydrop Systems account": "API-Schlüssel vom Hydrop Systems Konto",
-	"Connect your Hydrop System with ioBroker": "Verbinden Sie Ihr Hydrop System mit ioBroker",
-	"History Days": "Historie Tage",
-	"Hydrop Settings": "Hydrop-Einstellungen",
-	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Sollten Sie noch keinen API-Schlüssel haben, senden Sie bitte eine Anfrage per E-Mail an support@hydrop-systems.com",
-	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Wenn Ihnen dieses Projekt gefällt und Sie seine Entwicklung unterstützen möchten, können Sie gerne eine Spende hinterlassen.",
-	"Name of the water meter": "Name des Wasserzählers",
-	"Name of the water meter as defined in your Hydrop account": "Name des Wasserzählers, wie in Ihrem Hydrop Konto definiert",
-	"Number of days to fetch historical data": "Anzahl der Tage zum Abrufen historischer Daten",
-	"hydrop adapter settings": "Adaptereinstellungen für Hydrop"
+	"API Key from Hydrop Systems": "API-Key",
+	"API Key from Hydrop Systems account": "Der API-Key für deinen hydrop-Account",
+	"Connect your Hydrop System with ioBroker": "Verbinde dein hydropmeter mit ioBroker",
+	"History Days": "Historie (Tage)",
+	"Hydrop Settings": "Einstellungen",
+	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Du kannst einen API-Key generieren, indem du in der hydrop App zu Einstellungen ⮕ Konto ⮕ API-Key navigierst.",
+	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Wenn dir dieses Projekt gefällt und du seine Entwicklung unterstützen möchten, kannst du gerne eine Spende hinterlassen.",
+	"Name of the water meter": "Name des hydropmeter",
+	"Name of the water meter as defined in your Hydrop account": "Der Name, der in der hydrop App für das hydropmeter vergeben wurde",
+	"Number of days to fetch historical data": "Anzahl der Tage, für die historische Daten gespeichert werden",
+	"hydrop adapter settings": "Einstellungen für den hydrop Adapter"
 }

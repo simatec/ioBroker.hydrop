@@ -1,13 +1,13 @@
 {
-	"API Key from Hydrop Systems": "API-sleutel van Hydrop Systems",
-	"API Key from Hydrop Systems account": "API-sleutel van Hydrop Systems-account",
-	"Connect your Hydrop System with ioBroker": "Verbind uw Hydrop-systeem met ioBroker",
-	"History Days": "Geschiedenis Dagen",
-	"Hydrop Settings": "Hydrop-instellingen",
-	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Als u nog geen API-sleutel heeft, stuur dan een verzoek per e-mail naar support@hydrop-systems.com",
-	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Als u dit project leuk vindt en de ontwikkeling ervan wilt ondersteunen, kunt u een donatie achterlaten.",
-	"Name of the water meter": "Naam van de watermeter",
-	"Name of the water meter as defined in your Hydrop account": "Naam van de watermeter zoals gedefinieerd in uw Hydrop-account",
-	"Number of days to fetch historical data": "Aantal dagen om historische gegevens op te halen",
-	"hydrop adapter settings": "Adapterinstellingen voor hydrop"
+	"API Key from Hydrop Systems": "API-sleutel",
+	"API Key from Hydrop Systems account": "De API-sleutel voor je hydrop-account",
+	"Connect your Hydrop System with ioBroker": "Verbind je hydropmeter met ioBroker",
+	"History Days": "Geschiedenis (dagen)",
+	"Hydrop Settings": "Instellingen",
+	"If you do not yet have an API key, please send a request by email to support@hydrop-systems.com": "Je kunt een API-sleutel genereren via Instellingen ⮕ Account ⮕ API-sleutel in de hydrop-app.",
+	"If you like this project and would like to support its development, you are welcome to leave a donation.": "Als je dit project leuk vindt en de ontwikkeling wilt steunen, kun je een donatie doen.",
+	"Name of the water meter": "Naam van de hydropmeter",
+	"Name of the water meter as defined in your Hydrop account": "Naam die is toegewezen aan de hydropmeter in de hydrop-app",
+	"Number of days to fetch historical data": "Aantal dagen waarvoor historische gegevens worden bewaard",
+	"hydrop adapter settings": "Instellingen voor de hydrop-adapter"
 }
