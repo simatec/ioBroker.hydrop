@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "hydrop",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "news": {
+      "0.1.3": {
+        "en": "Minified Adapter Logo\nLocalization, description and branding updates\nUpdate dependencies",
+        "de": "Mining Adapter Logo\nLokalisierung, Beschreibung und Branding-Updates\nAbhängigkeiten aktualisieren",
+        "ru": "Минифицированный логотип адаптера\nЛокализация, описание и обновления брендинга\nОбновление зависимостей",
+        "pt": "Logotipo de adaptador minimizado\nAtualizações de localização, descrição e marca\nAtualizar dependências",
+        "nl": "Minified Adapter Logo\nLocatie, beschrijving en branding updates\nAfhankelijkheden bijwerken",
+        "fr": "Logo de l'adaptateur minifié\nLocalisation, description et mise à jour des marques\nMise à jour des dépendances",
+        "it": "Logo dell'adattatore\nLocalizzazione, descrizione e aggiornamenti di marca\nDipendenze di aggiornamento",
+        "es": "Logo Adaptador Mineificado\nLocalización, descripción y actualizaciones de marcación\nActualizar las dependencias",
+        "pl": "Zminione logo adaptera\nAktualizacja lokalizacji, opisu i marki\nAktualizuj zależności",
+        "uk": "Логотип змінного струму\nЛокалізація, опис та оновлення бренду\nОновлення залежності",
+        "zh-cn": "已修改的适配器日志\n本地化、描述和品牌更新\n更新依赖关系"
+      },
       "0.1.2": {
         "en": "Fix for Beta Release",
         "de": "Fix für Beta Release",
@@ -80,19 +93,6 @@
         "pl": "Dodano zaufany wydawca\nPoprawiony kod źródłowy\nReadme added",
         "uk": "Довірений видавець\nКод джерела покращений\nГотове додано",
         "zh-cn": "添加了信任的出版商\n源代码改进\n已读取"
-      },
-      "0.0.2": {
-        "en": "initial release",
-        "de": "erstausstrahlung",
-        "ru": "первоначальное освобождение",
-        "pt": "libertação inicial",
-        "nl": "eerste release",
-        "fr": "libération initiale",
-        "it": "rilascio iniziale",
-        "es": "liberación inicial",
-        "pl": "początkowe zwolnienie",
-        "uk": "початковий реліз",
-        "zh-cn": "初步释放"
       }
     },
     "titleLang": {
