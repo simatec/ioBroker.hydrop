@@ -64,6 +64,7 @@ If you want to check whether the hydropmeter is compatible with your type of wat
 ### **WORK IN PROGRESS**
 * (Goriatch) Minified Adapter Logo
 * (Goriatch) Localization, description and branding updates
+* (simatec) Update dependencies
 
 ### 0.1.2 (2025-11-02)
 * (simatec) Fix for Beta Release
