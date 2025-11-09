@@ -63,6 +63,7 @@ If you want to check whether the hydropmeter is compatible with your type of wat
 <!-- ### **WORK IN PROGRESS** -->
 ### **WORK IN PROGRESS**
 * (simatec) Fix dependabot
+* (simatec) Update dependencies
 
 ### 0.1.3 (2025-11-05)
 * (Goriatch) Minified Adapter Logo
