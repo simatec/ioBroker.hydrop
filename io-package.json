@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "hydrop",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "news": {
+      "0.1.4": {
+        "en": "Fix dependabot\nUpdate dependencies",
+        "de": "Behobene Abhängigkeiten\nAbhängigkeiten aktualisieren",
+        "ru": "Исправить Dependabot\nОбновление зависимостей",
+        "pt": "Corrigir dependabot\nAtualizar dependências",
+        "nl": "Fix dependabot\nAfhankelijkheden bijwerken",
+        "fr": "Correction de l'bot de dépendance\nMise à jour des dépendances",
+        "it": "Fissare dipendeabot\nDipendenze di aggiornamento",
+        "es": "Fijar a los dependientes\nActualizar las dependencias",
+        "pl": "Napraw zależny\nAktualizuj zależności",
+        "uk": "Фіксація залежності\nОновлення залежності",
+        "zh-cn": "修补依存符\n更新依赖关系"
+      },
       "0.1.3": {
         "en": "Minified Adapter Logo\nLocalization, description and branding updates\nUpdate dependencies",
         "de": "Mining Adapter Logo\nLokalisierung, Beschreibung und Branding-Updates\nAbhängigkeiten aktualisieren",
@@ -80,19 +93,6 @@
         "pl": "wiele małych poprawek",
         "uk": "багато маленьких фіксаторів",
         "zh-cn": "许多小修正"
-      },
-      "0.0.3": {
-        "en": "Trusted Publisher added\nSource code improved\nReadme added",
-        "de": "Trusted Publisher hinzugefügt\nQuellcode verbessert\nReader hinzugefügt",
-        "ru": "Доверенный издатель добавил\nИсходный код улучшен\nReadme добавлено",
-        "pt": "Editor confiável adicionado\nCódigo-fonte melhorado\nReadme adicionado",
-        "nl": "Vertrouwde uitgever toegevoegd\nBroncode verbeterd\nLezen toegevoegd",
-        "fr": "Éditeur fiable ajouté\nCode source amélioré\nLire ajouté",
-        "it": "Trusted Publisher aggiunto\nCodice sorgente migliorato\nLeggime aggiunto",
-        "es": "Trusted Publisher añadido\nMejoramiento del código fuente\nReadme added",
-        "pl": "Dodano zaufany wydawca\nPoprawiony kod źródłowy\nReadme added",
-        "uk": "Довірений видавець\nКод джерела покращений\nГотове додано",
-        "zh-cn": "添加了信任的出版商\n源代码改进\n已读取"
       }
     },
     "titleLang": {
