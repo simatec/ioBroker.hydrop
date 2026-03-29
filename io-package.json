@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "hydrop",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "news": {
+      "0.1.5": {
+        "en": "Fix License\nUpdate dependencies\nUpdate automerge\nUpdate io-package",
+        "de": "Lizenzierung aktivieren\nAbhängigkeiten aktualisieren\nAutomerge aktualisieren\nUpdate io-package",
+        "ru": "Лицензия Fix\nОбновление зависимостей\nОбновление Automerge\nОбновление io-package",
+        "pt": "Licença de correção\nAtualizar dependências\nActualizar a fusão automática\nAtualizar io-pacote",
+        "nl": "Fix Licentie\nAfhankelijkheden bijwerken\nAutomergen bijwerken\nIo-pakket bijwerken",
+        "fr": "Correction de la licence\nMise à jour des dépendances\nMettre à jour automatiquement\nMettre à jour io-package",
+        "it": "Fissare la licenza\nDipendenze di aggiornamento\nAggiornamento automatico\nAggiornamento del pacchetto io",
+        "es": "Fijar licencia\nActualizar las dependencias\nActualizar automerge\nActualización io-paquete",
+        "pl": "Napraw licencję\nAktualizuj zależności\nAktualizuj automatykę\nAktualizuj pakiet jo-",
+        "uk": "Документація\nОновлення залежності\nОновлення автомержа\nОновлення io-package",
+        "zh-cn": "修补许可证\n更新依赖关系\n更新自动合并\n更新 io 包装"
+      },
       "0.1.4": {
         "en": "Fix dependabot\nUpdate dependencies",
         "de": "Behobene Abhängigkeiten\nAbhängigkeiten aktualisieren",
@@ -80,19 +93,6 @@
         "pl": "Napraw dzienne zużycie\nget current state added\nPopraw wyjście",
         "uk": "Фіксація щоденного споживання\nотримувати поточні стани додано\nФіксований вихід",
         "zh-cn": "每日消费\n添加当前状态\n修正输出"
-      },
-      "0.0.4": {
-        "en": "many small fixes",
-        "de": "viele kleine fixierungen",
-        "ru": "много маленьких фикс",
-        "pt": "muitas pequenas correções",
-        "nl": "veel kleine fixes",
-        "fr": "de nombreuses petites corrections",
-        "it": "molte piccole correzioni",
-        "es": "muchos pequeños arreglos",
-        "pl": "wiele małych poprawek",
-        "uk": "багато маленьких фіксаторів",
-        "zh-cn": "许多小修正"
       }
     },
     "titleLang": {
