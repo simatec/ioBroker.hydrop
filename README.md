@@ -104,6 +104,8 @@ If you want to check whether the hydropmeter is compatible with your type of wat
 
 *****
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 MIT License
 
