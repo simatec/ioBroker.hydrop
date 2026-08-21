@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "hydrop",
-    "version": "0.1.5",
+    "version": "0.2.0",
     "news": {
+      "0.2.0": {
+        "en": "Adapter requires node.js >= 22 now\nUpdate dependencies\nsmall Bugfixes",
+        "de": "Der Adapter benötigt jetzt Node.js >= 22.\nAbhängigkeiten aktualisieren\nkleinere Fehlerbehebungen",
+        "ru": "Для работы адаптера требуется Node.js версии >= 22.\nОбновить зависимости\nнебольшие исправления ошибок",
+        "pt": "O adaptador agora requer Node.js >= 22.\nAtualizar dependências\nPequenas correções de bugs",
+        "nl": "De adapter vereist nu Node.js versie 22 of hoger.\nAfhankelijkheden bijwerken\nkleine bugfixes",
+        "fr": "L'adaptateur nécessite désormais Node.js >= 22.\nMettre à jour les dépendances\nCorrections de bugs mineurs",
+        "it": "L'adattatore ora richiede Node.js >= 22\nAggiorna le dipendenze\nPiccole correzioni di bug",
+        "es": "El adaptador ahora requiere node.js >= 22.\nActualizar dependencias\nPequeñas correcciones de errores",
+        "pl": "Adapter wymaga teraz node.js >= 22\nAktualizuj zależności\ndrobne poprawki błędów",
+        "uk": "Адаптер тепер вимагає node.js >= 22\nОновлення залежностей\nневеликі виправлення помилок",
+        "zh-cn": "适配器现在需要 node.js 版本 >= 22。\n更新依赖项\n修复了一些小错误"
+      },
       "0.1.5": {
         "en": "Fix License\nUpdate dependencies\nUpdate automerge\nUpdate io-package",
         "de": "Lizenzierung aktivieren\nAbhängigkeiten aktualisieren\nAutomerge aktualisieren\nUpdate io-package",
@@ -80,19 +93,6 @@
         "pl": "Napraw dzienne zużycie\nAktualizuj zależności",
         "uk": "Фіксація щоденного споживання\nОновлення залежності",
         "zh-cn": "每日消费\n更新依赖关系"
-      },
-      "0.0.5": {
-        "en": "Fix daily Consumption\nget current states added\nFix output",
-        "de": "Täglicher Verbrauch\naktuelle zustände hinzugefügt\nFeste Ausgabe",
-        "ru": "Фиксировать ежедневное потребление\nдобавить текущие состояния\nФиксированный выход",
-        "pt": "Corrigir o consumo diário\nobter estados atuais adicionados\nCorrigir a saída",
-        "nl": "Repareren dagelijks verbruik\nhuidige status toevoegen\nUitvoer herstellen",
-        "fr": "Fixer la consommation quotidienne\najouter les états actuels\nCorrection de la sortie",
-        "it": "Fissare il consumo giornaliero\nottenere stati attuali aggiunto\nUscita di fissaggio",
-        "es": "Fijar el consumo diario\nobtener estados actuales añadidos\nSalida fija",
-        "pl": "Napraw dzienne zużycie\nget current state added\nPopraw wyjście",
-        "uk": "Фіксація щоденного споживання\nотримувати поточні стани додано\nФіксований вихід",
-        "zh-cn": "每日消费\n添加当前状态\n修正输出"
       }
     },
     "titleLang": {
