@@ -61,6 +61,9 @@ If you want to check whether the hydropmeter is compatible with your type of wat
 
 ## Changelog
 <!-- ### **WORK IN PROGRESS** -->
+### **WORK IN PROGRESS**
+(simatec) Update dependencies
+
 ### 0.2.0 (2026-08-21)
 * (copilot) Adapter requires node.js >= 22 now
 * (simatec) Update dependencies
